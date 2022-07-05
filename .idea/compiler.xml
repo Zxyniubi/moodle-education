@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="moodle-education-admin-feign" />
+        <module name="moodle-education-user-feign" />
+        <module name="moodle-education-course-feign" />
+        <module name="moodle-education-course-service" />
+        <module name="moodle-education-admin-service" />
+        <module name="moodle-education-user-service" />
+        <module name="gateway" />
+        <module name="common-core" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="common-core" target="1.8" />
+      <module name="gateway" target="1.8" />
+      <module name="moodle-education" target="1.8" />
+      <module name="moodle-education-admin" target="1.8" />
+      <module name="moodle-education-admin-feign" target="1.8" />
+      <module name="moodle-education-admin-service" target="1.8" />
+      <module name="moodle-education-common" target="1.8" />
+      <module name="moodle-education-course" target="1.8" />
+      <module name="moodle-education-course-feign" target="1.8" />
+      <module name="moodle-education-course-service" target="1.8" />
+      <module name="moodle-education-user" target="1.8" />
+      <module name="moodle-education-user-feign" target="1.8" />
+      <module name="moodle-education-user-service" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="PREFER_TARGET_JDK_COMPILER" value="false" />
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="common-core" options="" />
+      <module name="gateway" options="" />
+      <module name="moodle-education" options="" />
+      <module name="moodle-education-admin" options="" />
+      <module name="moodle-education-admin-feign" options="" />
+      <module name="moodle-education-admin-service" options="" />
+      <module name="moodle-education-common" options="" />
+      <module name="moodle-education-course" options="" />
+      <module name="moodle-education-course-feign" options="" />
+      <module name="moodle-education-course-service" options="" />
+      <module name="moodle-education-user" options="" />
+      <module name="moodle-education-user-feign" options="" />
+      <module name="moodle-education-user-service" options="" />
+    </option>
+  </component>
+</project>

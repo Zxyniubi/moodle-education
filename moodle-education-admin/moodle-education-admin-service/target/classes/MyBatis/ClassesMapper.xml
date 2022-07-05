@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.moodleeducation.user.Mapper.ClassesMapper">
+    <resultMap id="ClassesMap" type="com.moodleeducation.commoncore.entity.Classes">
+        <id column="classesId" property="classesId"/>
+        <result column="classes" property="classes"/>
+        <association property="grade" javaType="com.moodleeducation.commoncore.entity.Grade">
+            <id column="gradeId" property="gradeId"/>
+            <result property="gradeName" column="gradeName"/>
+        </association>
+        <association property="major" javaType="com.moodleeducation.commoncore.entity.Major">
+            <id column="majorId" property="majorId"/>
+            <result property="majorName" column="majorName"/>
+        </association>
+    </resultMap>
+    <select id="listForPage" resultType="com.moodleeducation.commoncore.entity.Classes">
+     select * from classes,grade,major where classes.gradeId =grade.gradeId and major.majorId = classes.gradeId
+    </select>
+
+
+    <insert id="insert" parameterType="com.moodleeducation.commoncore.entity.Classes">
+        insert into Classes( gradeId, classes,majorId ) values ( #{gradeId}, #{classes},#{major.majorId} )
+    </insert>
+    <update id="update" parameterType="com.moodleeducation.commoncore.entity.Classes">
+        update Classes set gradeId = #{gradeId}, classes = #{classes} , majorId = #{major.majorId} where classesId = #{classesId}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from Classes where classesId = #{classesId}
+    </delete>
+
+    <select id="selectClassByGradeAndClasses" resultMap="ClassesMap">
+        select * from Classes ,grade,major where classes.gradeId =grade.gradeId and major.majorId = classes.gradeId and  classes= #{0} and gradeId =#{1}
+    </select>
+</mapper>

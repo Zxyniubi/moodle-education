@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.moodle.education.user.service.Mapper.StudentMapper">
+    <resultMap id="StudentMap" type="com.moodleeducation.commoncore.entity.Student">
+        <id property="sid" column="sid"/>
+        <result property="studentId" column="studentId"/>
+        <result property="name" column="name"/>
+        <result property="password" column="password"/>
+        <result property="sex" column="sex"/>
+        <result property="age" column="age"/>
+        <result property="createTime" column="createTime" javaType="java.util.Date"/>
+        <result property="mobile" column="mobile"/>
+        <result property="parentMobile" column="parentMobile"/>
+        <result property="picImg" column="picImg"/>
+        <result property="isAvailable" column="isAvailable"/>
+        <result property="lockState" column="lockState"/>
+        <association property="classes" javaType="com.moodleeducation.commoncore.entity.Classes" column="classesId">
+            <id property="classesId" column="classesId"/>
+            <result property="classes" column="classes"/>
+            <association property="major" javaType="com.moodleeducation.commoncore.entity.Major" column="majorId"  >
+                <id property="majorId" column="majorId"/>
+                <result column="majorName" property="majorName"/>
+            </association>
+            <association property="grade" javaType="com.moodleeducation.commoncore.entity.Grade" column="gradeId" >
+                <id property="gradeId" column="gradeId"/>
+                <result column="gradeName" property="gradeName"/>
+            </association>
+        </association>
+    </resultMap>
+
+    <resultMap id="gradeMap" type="com.moodleeducation.commoncore.entity.Grade">
+        <id property="gradeId" column="gradeId"/>
+        <result property="gradeName" column="gradeName"/>
+    </resultMap>
+    <select id="getAllStudent" resultMap="StudentMap">
+        select * from student,classes,major,grade where student.classesId = classes.classesId and classes.majorId = major.majorId and classes.gradeId = grade.gradeId
+    </select>
+
+    <select id="getById" resultMap="StudentMap">
+        select * from student,classes,major,grade where student.classesId = classes.classesId and classes.majorId = major.majorId and classes.gradeId = grade.gradeId and studentId=#{studentId} and isAvailable =1
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from student where studentId = #{studentId}
+    </delete>
+
+    <insert id="insertStudent" parameterType="com.moodleeducation.commoncore.entity.Student">
+        insert into student (studentId,name,password,sex,age,createTime,mobile,parentMobile,email,parentEmail,classesId,isAvailable,lockState)
+        values(#{studentId},#{name},#{password},#{sex},#{age},#{createTime},#{mobile},#{parentMobile},#{email},#{parentEmail},#{classes.classesId},#{isAvailable},#{lockState})
+    </insert>
+
+    <update id="updateStudent" parameterType="com.moodleeducation.commoncore.entity.Student">
+        update Student set name = #{name}, sex = #{sex}, age = #{age} , mobile = #{mobile} ,
+       parentMobile = #{parentMobile} , email = #{email} , parentEmail = #{parentEmail} , classesId = #{classes.classesId}
+        where studentId = #{studentId}
+    </update>
+
+
+
+</mapper>
+

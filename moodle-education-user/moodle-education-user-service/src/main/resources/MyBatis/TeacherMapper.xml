@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.moodle.education.user.service.Mapper.TeacherMapper">
+    <resultMap id="TeacherMap" type="com.moodleeducation.commoncore.entity.Teacher">
+        <id column="tid" property="tid" jdbcType="INTEGER"/>
+        <result column="teacherId" property="teacherId" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="TINYINT"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="picImg" property="picImg" jdbcType="VARCHAR"/>
+        <result column="isAvailable" property="isAvailable" jdbcType="VARCHAR"/>
+        <result column="createTime" property="createTime" javaType="java.util.Date"/>
+        <association property="subject" javaType="com.moodleeducation.commoncore.entity.Subject" >
+            <id property="subjectId" column="subjectId"/>
+            <result property="subjectName" column="subjectName"/>
+            <association property="major" javaType="com.moodleeducation.commoncore.entity.Major" column="majorId" >
+                <id column="majorId" property="majorId" jdbcType="INTEGER"/>
+                <result column="majorName" property="majorName"/>
+            </association>
+        </association>
+    </resultMap>
+    <select id="getById" parameterType="java.lang.String" resultMap="TeacherMap">
+        select * from teacher,subject,major where teacher.subjectId = subject.subjectId and major.majorId = subject.majorId and teacherId =#{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getAllTeacher" resultMap="TeacherMap">
+        select * from teacher,subject,major where teacher.subjectId = subject.subjectId and major.majorId = subject.majorId
+    </select>
+
+    <insert id="insertTeacher" parameterType="com.moodleeducation.commoncore.entity.Teacher">
+        insert into teacher(tid,teacherId,name,password,sex,createTime,mobile,email,picImg,subjectId,isAvailable)
+        values(#{tid},#{teacherId},#{name},#{password},#{sex},#{createTime},#{mobile},#{email},#{picImg},#{subject.subjectId},#{isAvailable})
+    </insert>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from teacher where teacherId=#{teacherId}
+    </delete>
+
+    <update id="updateTeacher" parameterType="com.moodleeducation.commoncore.entity.Teacher">
+        update teacher set name=#{name},sex=#{sex},mobile = #{mobile},email=#{email},subjectId=#{subject.subjectId} where teacherId = #{teacherId}
+    </update>
+
+</mapper>

@@ -1,0 +1,8 @@
+com\moodle\education\user\service\Mapper\TeacherMapper.class
+com\moodle\education\user\service\MoodleEducationUserServiceApplication.class
+com\moodle\education\user\service\Mapper\StudentMapper.class
+com\moodle\education\user\service\Controller\ClassesController.class
+com\moodle\education\user\service\Feign\Service\IFeignTeacherService.class
+com\moodle\education\user\service\Feign\Service\IFeignStudentService.class
+com\moodle\education\user\service\Feign\Controller\IFeignStudentController.class
+com\moodle\education\user\service\Feign\Controller\IFeignTeacherController.class

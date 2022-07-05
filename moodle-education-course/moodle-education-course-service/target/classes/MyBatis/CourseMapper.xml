@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.moodle.education.course.service.mapper.CourseMapper">
+    <select id="listForPage" parameterType="com.moodle.education.course.feign.interfaces.Qo.VideoQo" resultType="com.moodle.education.course.feign.interfaces.Vo.VideoVo">
+        select v.videoId,v.imgUrl,v.videoUrl,v.videoName,s.subjectName,t.Name,v.createTime,v.videoType,g.gradeName
+        from video as v inner join grade as g on v.gradeId = g.gradeId inner join teacher as t on v.teacherId = t.teacherId inner join subject as s on v.subjectId = s.subjectId
+        <where>
+            <if test="teacherId!=null and teacherId !=''">
+                 and v.teacherId=#{teacherId}
+            </if>
+            <if test="gradeId !=null and gradeId!=''">
+                and v.gradeId = #{gradeId}
+            </if>
+            <if test="videoType!=null and videoType!=''">
+                and videoType= #{videoType}
+            </if>
+        </where>
+    </select>
+
+    <update id="audit" parameterType="com.moodle.education.course.feign.interfaces.Qo.VideoAuditQo">
+        update video
+        <set>
+            <if test="videoType !=null">
+                videoType=#{videoType},
+            </if>
+            <if test="remark!=null">
+                remark=#{remark},
+            </if>
+            <if test="auditTime!=null">
+                auditTime=#{auditTime}
+            </if>
+        </set>
+        where videoId=#{videoId}
+    </update>
+
+    <insert id="uploadVideo" parameterType="com.moodle.education.course.feign.interfaces.entity.Video">
+        insert into video (videoId,videoType,videoName,createTime) values
+        (#{videoId},#{videoType},#{videoName},#{createTime})
+    </insert>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from video where videoId=#{videoId}
+    </delete>
+    <select id="getById" parameterType="java.lang.Integer" resultType="com.moodle.education.course.feign.interfaces.entity.Video">
+        select * from video where videoId=#{videoId}
+    </select>
+
+    <update id="update" parameterType="com.moodle.education.course.feign.interfaces.entity.Video">
+        update video
+        <set>
+            <if test="videoName!=null">
+                videoName= #{videoName},
+            </if>
+            <if test="videoUrl!=null">
+                videoUrl=#{videoUrl},
+            </if>
+            <if test="imgUrl!=null">
+                imgUrl=#{imgUrl},
+            </if>
+            <if test="teacherId!=null">
+                teacherId=#{teacherId},
+            </if>
+            <if test="subjectId!=null">
+                subjectId=#{subjectId},
+            </if>
+            <if test="gradeId!=null">
+                gradeId=#{gradeId},
+            </if>
+            <if test="createTime!=null">
+                createTime=#{createTime},
+            </if>
+            <if test="videoType!=null">
+                videoType=#{videoType},
+            </if>
+            <if test="auditTime!=null">
+                auditTime=#{auditTime},
+            </if>
+            <if test="remark!=null">
+                remark=#{remark}
+            </if>
+        </set>
+        where videoId=#{videoId}
+    </update>
+</mapper>

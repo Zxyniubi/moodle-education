@@ -1,0 +1,4 @@
+com\moodle\education\course\feign\interfaces\entity\Video.class
+com\moodle\education\course\feign\interfaces\Qo\VideoQo.class
+com\moodle\education\course\feign\interfaces\IFeignCourse.class
+com\moodle\education\course\feign\interfaces\Vo\VideoVo.class

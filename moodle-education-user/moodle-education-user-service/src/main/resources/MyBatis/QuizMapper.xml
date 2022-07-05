@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.moodle.education.user.service.Mapper.QuizMapper">
+<!--    TEACHER INTERFACE-->
+
+
+    <select id="listForPage" parameterType="java.lang.Integer" resultType="com.moodle.education.user.service.entity.VO.QuizVo">
+        select quizId,quizName,subjectName,majorName,gradeName,name,quizDate,quizDuration,t.name as teacherName
+        from quiz as q,teacher as t,subject as s,major as m,classes as c,grade as g
+        where q.subjectId = s.subjectId and q.teacherId =t.tid and  q.classesId = c.classesId  and c.gradeId = g.gradeId and c.majorId = m.majorId and q.teacherId=#{id}
+    </select>
+
+    <insert id="save" parameterType="com.moodle.education.user.service.entity.DTO.QuizDTO">
+        insert into quiz(quizName,subjectId,classesId,teacherId,quizDuration,quizDate)
+        values(#{quizName},#{subject},#{classesId},#{teacherId},#{quizDuration},#{quizDate})
+    </insert>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from quiz where quizId=#{id}
+    </delete>
+
+    <update id="update" parameterType="com.moodle.education.user.service.entity.DTO.QuizDTO">
+        update quiz set quizName={#quizName},subject=#{subject},classesId=#{classesId},teacherId=#{teacherId},quizDuration=#{quizDuration},quizDate=#{quizDate} where quizId =#{quizId}
+    </update>
+
+
+
+
+
+<!--    STUDENT INTERFACES-->
+    <select id="completeQuiz"  resultType="com.moodle.education.user.service.entity.VO.QuizVo">
+        select * from quiz where  classesId =#{classesId} and  quizId in (select quizId from score where sid=#{sid} )
+    </select>
+
+    <select id="incompleteQuiz" resultType="com.moodle.education.user.service.entity.VO.QuizVo">
+        select * from quiz where  classesId =#{classesId} and  quizId not in (select quizId from score where sid=#{sid} )
+    </select>
+
+
+</mapper>

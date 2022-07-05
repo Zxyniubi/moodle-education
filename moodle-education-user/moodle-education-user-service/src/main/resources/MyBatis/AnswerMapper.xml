@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.moodle.education.user.service.Mapper.AnswerMapper">
+
+    <insert id="save" parameterType="com.moodle.education.user.service.entity.Answer">
+    insert into answer(sid,quizId,question,questionType,answer,goodAnswer,score) values
+    <foreach collection="answerList"  item="items" separator=",">
+        (#{items.studentId},#{items.quizId},#{items.question},#{items.questionType},#{items.answer},#{items.goodAnswer},#{items.score})
+    </foreach>
+    </insert>
+
+</mapper>

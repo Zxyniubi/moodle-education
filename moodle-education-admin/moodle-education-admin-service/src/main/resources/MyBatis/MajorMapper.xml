@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.moodleeducation.user.Mapper.MajorMapper">
+    <select id="getById" resultType="com.moodleeducation.commoncore.entity.Major">
+        select * from major where majorId=#{majorId}
+    </select>
+
+    <select id="listForPage" resultType="com.moodleeducation.commoncore.entity.Major">
+        select * from major;
+    </select>
+
+    <insert id="save" parameterType="com.moodleeducation.commoncore.entity.Major">
+        insert into major(majorName) values(#{majorName})
+    </insert>
+
+    <update id="update" parameterType="com.moodleeducation.commoncore.entity.Major">
+        update major set majorName = #{majorName} where majorId = #{major.majorId}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from major where majorId = #{majorId}
+    </delete>
+</mapper>

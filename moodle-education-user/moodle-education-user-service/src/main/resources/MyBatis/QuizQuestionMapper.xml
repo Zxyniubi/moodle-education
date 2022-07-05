@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.moodle.education.user.service.Mapper.QuizQuestionMapper">
+
+    <select id="listChoiceByQuizId" parameterType="java.lang.Integer" resultType="com.moodle.education.user.service.entity.Choice">
+        select * from choice where quizId=#{quizId}
+    </select>
+
+    <select id="listJudgeByQuizId" resultType="com.moodle.education.user.service.entity.Judge">
+        select * from judge where quizId=#{quizId}
+    </select>
+
+    <insert id="saveChoice" parameterType="com.moodle.education.user.service.entity.Choice">
+        insert into choice (quizId,question,optionA,optionB,optionC,optionD,answer,analysis,score) values
+            <foreach collection="choiceList" item="items" separator=",">
+                (#{items.quizId},#{items.question},#{items.optionA},#{items.optionB},#{items.optionC},#{items.optionD},#{items.answer},#{items.analysis},#{items.score})
+            </foreach>
+    </insert>
+
+    <insert id="saveJudge" parameterType="com.moodle.education.user.service.entity.Judge">
+        insert into judge (quizId,question,answer,score) values
+        <foreach collection="judgeList" item="items" separator=",">
+            (#{items.quizId},#{items.question},#{items.answer},#{items.score})
+        </foreach>
+    </insert>
+
+    <update id="updateJudge" parameterType="com.moodle.education.user.service.entity.Judge">
+        update judge
+        <set>
+            <if test="question != null">
+                question =#{question}
+            </if>
+            <if test="answer != null">
+                answer = #{answer}
+            </if>
+            <if test="score!=null">
+                score = #{score}
+            </if>
+            <if test="analysis">
+                analysis=#{analysis}
+            </if>
+        </set>
+        where judgeId=#{judgeId}
+    </update>
+
+    <update id="updateChoice" parameterType="com.moodle.education.user.service.entity.Choice">
+        update choice
+        <set>
+            <if test="question!=null">
+                question = #{question}
+            </if>
+            <if test="optionA!=null">
+                optionA=#{optionA}
+            </if>
+            <if test="optionB!=null">
+                optionA=#{optionB}
+            </if>
+            <if test="optionC!=null">
+                optionA=#{optionC}
+            </if>
+            <if test="optionD!=null">
+                optionA=#{optionD}
+            </if>
+            <if test="answer!=null">
+                answer=#{answer}
+            </if>
+            <if test="analysis!=null">
+                analysis=#{analysis}
+            </if>
+            <if test="score!=null">
+                score= #{score}
+            </if>
+        </set>
+            where choiceId = #{choiceId}
+    </update>
+
+    <delete id="deleteChoice" parameterType="java.lang.Integer">
+        delete from choice where choiceId=#{id}
+    </delete>
+
+    <delete id="deleteJudge" parameterType="java.lang.Integer">
+        delete from judge where judgeId=#{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,2 @@
+com\moodle\education\user\feign\interfaces\IFeignStudent.class
+com\moodle\education\user\feign\interfaces\IFeignTeacher.class

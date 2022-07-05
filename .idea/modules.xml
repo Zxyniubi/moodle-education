@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/moodle-education-common/common-core/common-core.iml" filepath="$PROJECT_DIR$/moodle-education-common/common-core/common-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gateway/gateway.iml" filepath="$PROJECT_DIR$/gateway/gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/moodle-education.iml" filepath="$PROJECT_DIR$/moodle-education.iml" />
+      <module fileurl="file://$PROJECT_DIR$/moodle-education-admin/moodle-education-admin.iml" filepath="$PROJECT_DIR$/moodle-education-admin/moodle-education-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/moodle-education-admin/moodle-education-admin-feign/moodle-education-admin-feign.iml" filepath="$PROJECT_DIR$/moodle-education-admin/moodle-education-admin-feign/moodle-education-admin-feign.iml" />
+      <module fileurl="file://$PROJECT_DIR$/moodle-education-admin/moodle-education-admin-service/moodle-education-admin-service.iml" filepath="$PROJECT_DIR$/moodle-education-admin/moodle-education-admin-service/moodle-education-admin-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/moodle-education-common/moodle-education-common.iml" filepath="$PROJECT_DIR$/moodle-education-common/moodle-education-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/moodle-education-course/moodle-education-course.iml" filepath="$PROJECT_DIR$/moodle-education-course/moodle-education-course.iml" />
+      <module fileurl="file://$PROJECT_DIR$/moodle-education-course/moodle-education-course-feign/moodle-education-course-feign.iml" filepath="$PROJECT_DIR$/moodle-education-course/moodle-education-course-feign/moodle-education-course-feign.iml" />
+      <module fileurl="file://$PROJECT_DIR$/moodle-education-course/moodle-education-course-service/moodle-education-course-service.iml" filepath="$PROJECT_DIR$/moodle-education-course/moodle-education-course-service/moodle-education-course-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/moodle-education-user/moodle-education-user.iml" filepath="$PROJECT_DIR$/moodle-education-user/moodle-education-user.iml" />
+      <module fileurl="file://$PROJECT_DIR$/moodle-education-user/moodle-education-user-feign/moodle-education-user-feign.iml" filepath="$PROJECT_DIR$/moodle-education-user/moodle-education-user-feign/moodle-education-user-feign.iml" />
+      <module fileurl="file://$PROJECT_DIR$/moodle-education-user/moodle-education-user-service/moodle-education-user-service.iml" filepath="$PROJECT_DIR$/moodle-education-user/moodle-education-user-service/moodle-education-user-service.iml" />
+    </modules>
+  </component>
+</project>

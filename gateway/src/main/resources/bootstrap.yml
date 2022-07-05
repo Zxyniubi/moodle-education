@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/moodle?serverTimezone=GMT%2B8&useSSL=false
+    username: root
+    password: 123456
+  application:
+    name: moodle-education-gateway
+  profiles:
+    active: opens
+  cloud:
+    nacos:
+      username: nacos
+      password: nacos
+      server-addr: 127.0.0.1:8848
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml
+    gateway:
+      routes:
+        - id: Ifeign_class
+          uri: http://localhost:5830
+          predicates:
+          - Path= /api/user/**
+
+        - id: path_route #路由的ID
+          uri: http://localhost:5850 #匹配后路由地址
+          predicates: # 断言，路径相匹配的进行路由
+          - Path= /api/*/**
+  codec:
+    max-in-memory-size: 1048576
+
+server:
+  port: 5840

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.moodleeducation.user.Mapper.GradeMapper">
+    <select id="getById" resultType="com.moodleeducation.commoncore.entity.Grade">
+        select * from grade where gradeId=#{gradeId}
+    </select>
+
+    <select id="listForPage" resultType="com.moodleeducation.commoncore.entity.Grade">
+        select * from grade;
+    </select>
+
+    <insert id="save" parameterType="com.moodleeducation.commoncore.entity.Grade">
+        insert into grade(gradeName) values(#{gradeName})
+    </insert>
+
+    <update id="update" parameterType="com.moodleeducation.commoncore.entity.Grade">
+        update grade set gradeName = #{gradeName} where gradeId = #{grade.gradeId}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from grade where gradeId = #{gradeId}
+    </delete>
+</mapper>

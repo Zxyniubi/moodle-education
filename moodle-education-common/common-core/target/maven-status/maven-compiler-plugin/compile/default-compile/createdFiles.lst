@@ -1,0 +1,15 @@
+com\moodleeducation\commoncore\entity\Classes.class
+com\moodleeducation\commoncore\tools\MD5Util.class
+com\moodleeducation\commoncore\entity\Admin.class
+com\moodleeducation\commoncore\entity\Permission.class
+com\moodleeducation\commoncore\entity\Major.class
+com\moodleeducation\commoncore\base\BaseException.class
+com\moodleeducation\commoncore\entity\Teacher.class
+com\moodleeducation\commoncore\base\Result.class
+com\moodleeducation\commoncore\entity\Student.class
+com\moodleeducation\commoncore\enums\ResultEnum.class
+com\moodleeducation\commoncore\entity\Grade.class
+com\moodleeducation\commoncore\tools\JWTUtils.class
+com\moodleeducation\commoncore\enums\RedisPreEnum.class
+com\moodleeducation\commoncore\CommonCoreApplication.class
+com\moodleeducation\commoncore\entity\Subject.class
