@@ -1,27 +1,43 @@
 package com.moodle.education.course.service.service;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.moodle.education.course.feign.interfaces.Qo.VideoAuditQo;
+import com.moodle.education.course.feign.interfaces.Qo.VideoEsQo;
 import com.moodle.education.course.feign.interfaces.Qo.VideoQo;
 import com.moodle.education.course.feign.interfaces.Vo.VideoVo;
 import com.moodle.education.course.feign.interfaces.entity.Video;
 import com.moodle.education.course.service.mapper.CourseMapper;
 import com.moodle.education.course.service.tools.AliyunUtils;
 import com.moodle.education.course.service.tools.StrUtils;
+import com.moodleeducation.commoncore.base.PageUtils;
 import com.moodleeducation.commoncore.base.Result;
+import com.moodleeducation.commoncore.entity.Student;
 import com.moodleeducation.commoncore.enums.CourseEnum;
 import com.moodleeducation.commoncore.enums.ResultEnum;
 import com.moodleeducation.commoncore.tools.IdWorker;
 import com.moodleeducation.commoncore.tools.SystemUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.MultiMatchQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.core.SearchHit;
+import org.springframework.data.elasticsearch.core.SearchHits;
+import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -34,6 +50,8 @@ import static com.moodleeducation.commoncore.base.ThreadPool.callbackExecutor;
 public class IFeignCourseService {
     @Autowired
     private CourseMapper courseMapper;
+    @Autowired
+    private ElasticsearchRestTemplate elasticsearchRestTemplate;
     public PageInfo<VideoVo> listForPage(VideoQo videoQo){
         if (videoQo.getPageNum()<0){
             videoQo.setPageNum(1);
@@ -178,5 +196,44 @@ public class IFeignCourseService {
             return Result.error("提交失败，请稍后再试");
         }
         return Result.success(update);
+    }
+
+
+    public Result<PageUtils<VideoVo>> searchList(VideoEsQo bo) {
+        if (bo.getPageNum() <= 0) {
+            bo.setPageNum(1);
+        }
+        if (bo.getPageSize() <= 0) {
+            bo.setPageSize(20);
+        }
+        if (StringUtils.isEmpty(bo.getVideoName())) {
+            return Result.success(new PageUtils<VideoVo>());
+        }
+        HighlightBuilder.Field field = null;
+        // 1 =高亮
+        if (bo.getIsHighLightField() != null && bo.getIsHighLightField().equals(1)) {
+            field = new HighlightBuilder.Field("name").preTags("<mark>").postTags("</mark>");
+        }
+        NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
+        if (bo.getIsHighLightField() != null && bo.getIsHighLightField().equals(1)) {
+            nativeSearchQueryBuilder.withHighlightFields(field);
+        }
+        //分页
+        nativeSearchQueryBuilder.withPageable(PageRequest.of(bo.getPageNum()-1, bo.getPageSize()));
+        //复核查询
+        BoolQueryBuilder qb = QueryBuilders.boolQuery();
+        // 模糊查询multiMatchQuery，最佳字段best_fields
+        qb.must(QueryBuilders.multiMatchQuery(bo.getVideoName(),"name").type(MultiMatchQueryBuilder.Type.BEST_FIELDS));
+        nativeSearchQueryBuilder.withQuery(qb);
+        SearchHits<Video> searchHits =elasticsearchRestTemplate.search(nativeSearchQueryBuilder.build(),Video.class, IndexCoordinates.of("video"));
+        List<VideoVo> videoVoList =new ArrayList<>();
+        for(SearchHit<Video> hits:searchHits){
+            log.info(hits.toString());
+             Video content = hits.getContent();
+            videoVoList.add(BeanUtil.copyProperties(content,VideoVo.class));
+        }
+        PageUtils<VideoVo> pageVideo = new PageUtils<>();
+        pageVideo.setList(videoVoList);
+        return Result.success(pageVideo);
     }
 }

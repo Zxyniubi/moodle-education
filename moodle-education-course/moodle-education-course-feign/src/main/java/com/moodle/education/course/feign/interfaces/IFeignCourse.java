@@ -3,9 +3,11 @@ package com.moodle.education.course.feign.interfaces;
 import com.github.pagehelper.PageInfo;
 import com.moodle.education.course.feign.interfaces.Config.FeignSupportConfig;
 import com.moodle.education.course.feign.interfaces.Qo.VideoAuditQo;
+import com.moodle.education.course.feign.interfaces.Qo.VideoEsQo;
 import com.moodle.education.course.feign.interfaces.Qo.VideoQo;
 import com.moodle.education.course.feign.interfaces.Vo.VideoVo;
 import com.moodle.education.course.feign.interfaces.entity.Video;
+import com.moodleeducation.commoncore.base.PageUtils;
 import com.moodleeducation.commoncore.base.Result;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
@@ -35,4 +37,7 @@ public interface IFeignCourse {
 
     @RequestMapping(value = "/feign/teacher/course/uploadImg",method = RequestMethod.POST,consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     Result<Integer> uploadImg(@RequestPart(value = "imgFile") MultipartFile imgFile,@RequestParam(value = "videoId")Long videoId);
+
+    @RequestMapping(value = "/feign/course/query",method = RequestMethod.POST)
+    Result<PageUtils<VideoVo>> queryCourse(@RequestBody VideoEsQo videoEsQo);
     }

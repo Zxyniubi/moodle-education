@@ -19,8 +19,8 @@ import java.io.InputStream;
 public final class  AliyunUtils {
     private static final String bucketName ="moodle-video-bucket";
     private static final String end_point = "cn-beijing.oss.aliyuncs.com";
-    private static final String accessKey_id="";
-    private static final String secret="";
+    private static final String accessKey_id="LTAI5t9h9WU1kjjA6KT8onZe";
+    private static final String secret="1tnbpwLhkz9GPNPKpW3l6UGwo3Gk4s";
     private static final String AliyunOSSUrl="https:"+bucketName+"."+"oss-cn-beijing.aliyuncs.com/";
     private AliyunUtils(){}
 

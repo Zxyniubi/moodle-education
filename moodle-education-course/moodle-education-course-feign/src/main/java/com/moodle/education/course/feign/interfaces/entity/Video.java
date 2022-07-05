@@ -1,16 +1,19 @@
 package com.moodle.education.course.feign.interfaces.entity;
 
 import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.io.Serializable;
 import java.util.Date;
 
 @Data
-
+@Document(indexName = "video",shards = 5)
 public class Video implements Serializable {
 
     private static final long serialVersionUID = 1L;
     //视频编号
+    @Id
     private Long videoId;
     //视频名称
     private String videoName;

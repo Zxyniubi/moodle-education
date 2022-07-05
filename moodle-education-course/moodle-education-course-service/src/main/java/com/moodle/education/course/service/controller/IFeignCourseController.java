@@ -3,10 +3,12 @@ package com.moodle.education.course.service.controller;
 import com.github.pagehelper.PageInfo;
 import com.moodle.education.course.feign.interfaces.IFeignCourse;
 import com.moodle.education.course.feign.interfaces.Qo.VideoAuditQo;
+import com.moodle.education.course.feign.interfaces.Qo.VideoEsQo;
 import com.moodle.education.course.feign.interfaces.Qo.VideoQo;
 import com.moodle.education.course.feign.interfaces.Vo.VideoVo;
 import com.moodle.education.course.feign.interfaces.entity.Video;
 import com.moodle.education.course.service.service.IFeignCourseService;
+import com.moodleeducation.commoncore.base.PageUtils;
 import com.moodleeducation.commoncore.base.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,6 +51,11 @@ public class IFeignCourseController implements IFeignCourse {
     @Override
     public Result<Integer> uploadImg(MultipartFile imgFile,Long videoId) {
         return courseService.uploadImg(imgFile,videoId);
+    }
+
+    @Override
+    public Result<PageUtils<VideoVo>> queryCourse(VideoEsQo videoEsQo) {
+        return courseService.searchList(videoEsQo);
     }
 }
 

@@ -3,9 +3,11 @@ package com.moodle.education.course.feign.interfaces.Vo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 @Data
-public class VideoVo {
+public class VideoVo implements Serializable {
+    private final static long serialVersionUUID=1L;
     private Integer videoId;
     private String videoName;
     private String videoUrl;
