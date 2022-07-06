@@ -38,4 +38,5 @@
 |SLF4J	|日志组件|	http://www.slf4j.org/|
 |Maven|项目构建管理|http://maven.apache.org/|
 |认证组件|JWT|http://jwt.io|
+|安全框架|SpringSecurity|	https://spring.io/projects/spring-cloud-security/|
 |搜索工具|ElasticSearch|https://www.elastic.co/cn/elasticsearch/|
