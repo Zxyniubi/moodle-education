@@ -40,3 +40,17 @@
 |认证组件|JWT|http://jwt.io|
 |安全框架|SpringSecurity|	https://spring.io/projects/spring-cloud-security/|
 |搜索工具|ElasticSearch|https://www.elastic.co/cn/elasticsearch/|
+
+## 项目部分截图
+### 权限管理
+![](./doc/管理员.jpg)
+### 视频审核
+![](./doc/视频审核.jpg)
+### 上传小测
+![](./doc/上传小测.jpg)
+### 成绩分析
+![](./doc/成绩分析.jpg)
+### 考试成绩
+![](./doc/考试成绩.jpg)
+### 在线考试
+![](./doc/在线考试.jpg)
