@@ -30,7 +30,7 @@
 |----|----|----|
 |spirng-cloud-alibaba|核心框架|https://spring.io/projects/spring-cloud-alibaba/|
 |SpinrMVC|视图框架|http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#mvc|
-|myBatis|持久层框架|http://www.mybatis.org/mybatis-3/zh/index.html|
+|MyBatis|持久层框架|http://www.mybatis.org/mybatis-3/zh/index.html|
 |Alibaba nacos|注册和配置中心|https://github.com/alibaba/nacos/|
 |Redis|分布式缓存数据库|	https://redis.io/|
 |SpringCloud OpenFeign|服务调用|https://spring.io/projects/spring-cloud-openfeign/|
